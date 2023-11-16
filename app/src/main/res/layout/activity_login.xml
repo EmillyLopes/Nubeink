@@ -17,10 +17,10 @@
         android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenhaLogin" />
 
     <EditText
-        android:id="@+id/editTextPersonName2"
+        android:id="@+id/editTextPersonSenhaLogin"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonEmailLogin" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <EditText
-        android:id="@+id/editTextPersonName"
+        android:id="@+id/editTextPersonEmailLogin"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
@@ -95,7 +95,7 @@
         tools:layout_editor_absoluteY="769dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonLogin"
         android:layout_width="85dp"
         android:layout_height="84dp"
         android:layout_marginTop="68dp"
@@ -104,6 +104,6 @@
         android:drawableTintMode="screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenhaLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
