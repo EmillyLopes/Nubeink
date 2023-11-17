@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Estilo para os botões circulares -->
+    <style name="CircularButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <!-- Outros atributos de estilo conforme necessário -->
+
+        <!-- Estilo do fundo circular -->
+        <item name="android:background">@drawable/circulo</item>
+        <!-- Estilo do ícone -->
+        <item name="app:iconTint">@color/black</item>
+        <item name="app:iconPadding">10dp</item>
+        <item name="app:iconSize">36dp</item>
+    </style>
+
+</resources>
