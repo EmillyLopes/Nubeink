@@ -7,48 +7,8 @@
     android:background="#EFF0FC"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextPersonSenhaLogin"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/email"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:textColorHint="#3B608C"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonEmailLogin" />
-
-    <EditText
-        android:id="@+id/editTextPersonSenha"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/password"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Senha"
-        android:inputType="textPersonName"
-        android:textColorHint="#3B608C"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenhaLogin" />
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imagemLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/top_background2"
@@ -60,7 +20,7 @@
         app:srcCompat="@drawable/top_background1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textoCrieConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -70,53 +30,92 @@
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
-
-    <EditText
-        android:id="@+id/editTextPersonEmailLogin"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/edittext_background"
-        android:drawableStart="@drawable/name"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="textPersonName"
-        android:textColorHint="#3B608C"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/imagemLogin" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewCadastre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="-48dp"
         android:text="Cadastrar"
         android:textColor="#3b608c"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenhaCadastro" />
 
     <Button
         android:id="@+id/buttonCadastrar"
         android:layout_width="93dp"
         android:layout_height="82dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:background="?android:attr/windowSplashScreenBackground"
         android:drawableTop="@drawable/btn_arraw1"
         android:drawableTintMode="screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenha" />
+        app:layout_constraintStart_toEndOf="@+id/textViewCadastre"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonSenhaCadastro" />
 
+    <EditText
+        android:id="@+id/editTextPersonName"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="text"
+        android:textColorHint="#3B608C"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoCrieConta" />
+
+    <EditText
+        android:id="@+id/editTextPersonEmailCadastro"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#3B608C"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
+
+    <EditText
+        android:id="@+id/editTextPersonSenhaCadastro"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColorHint="#3B608C"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonEmailCadastro" />
 </androidx.constraintlayout.widget.ConstraintLayout>

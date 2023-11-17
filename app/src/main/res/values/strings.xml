@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Nubeink</string>
     <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
+    <string name="title_activity_teste">teste</string>
 </resources>
