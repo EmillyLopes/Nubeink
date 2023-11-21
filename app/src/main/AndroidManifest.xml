@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nubeink"
         tools:targetApi="31" >
-        <activity android:name=".cadastro.CadastroActivity"
+        <activity android:name=".view.CadastroActivity"
+            android:exported="false"
+            android:label=""/>
+        <activity android:name=".view.MenuActivity"
+            android:exported="false"
+            android:label=""/>
+        <activity android:name=".view.TransferirActivity"
             android:exported="false"
             android:label=""/>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

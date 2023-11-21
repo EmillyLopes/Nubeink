@@ -35,10 +35,10 @@
         android:id="@+id/textViewNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Olá, Fulano"
-        android:textColor="#FFFFFF"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/ola"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/buttonOcultar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -66,7 +66,7 @@
             app:iconSize="24dp" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/buttonAjuda"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -75,7 +75,7 @@
             app:iconSize="24dp" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/buttonNotificacoes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -86,83 +86,138 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewConta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Conta"
-        android:textColor="#6672FF"
+        android:text="@string/conta"
+        android:textColor="@color/purple_primary"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewSaldo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="R$ 1.094,80"
+        android:text="@string/saldoConta"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewConta" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="366dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayoutAcoes"
+        android:layout_width="385dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/textViewSaldo">
 
-        <ImageButton
-            android:id="@+id/button15"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/circulo"
-            android:scaleType="centerInside"
-            android:src="@drawable/pix" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="366dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/circulo"
-            android:scaleType="center"
-            tools:src="@drawable/codigo_de_barras" />
+            <ImageButton
+                android:id="@+id/buttonPix"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/circulo"
+                android:scaleType="centerInside"
+                android:src="@drawable/pix" />
 
-        <ImageButton
-            android:id="@+id/button13"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/circulo"
-            android:scaleType="center"
-            tools:src="@drawable/transferir" />
+            <ImageButton
+                android:id="@+id/buttonPagar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/circulo"
+                android:scaleType="centerInside"
+                android:src="@drawable/codigo_de_barras"
+                android:tint="@color/black" />
 
-        <ImageButton
-            android:id="@+id/button16"
-            android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/buttonTransferir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/circulo"
+                android:scaleType="centerInside"
+                android:src="@drawable/transferir"
+                android:tint="@color/black" />
+
+            <ImageButton
+                android:id="@+id/buttonDepositar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/circulo"
+                android:scaleType="centerInside"
+                android:src="@drawable/depositar"
+                android:tint="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LayoutNomesAcoes"
+            android:layout_width="366dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/circulo"
-            android:scaleType="center"
-            android:src="@drawable/depositar" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewPix"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/pix"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewPagar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/pagar"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewTransferir"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/transferir"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/textViewDepositar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/depositar"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/buttonConta"
         android:layout_width="57dp"
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
@@ -171,17 +226,18 @@
         app:icon="@drawable/angulo_direito"
         app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toEndOf="@+id/textViewConta"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <Button
-        android:id="@+id/button18"
+        android:id="@+id/buttonMeusCartoes"
         style="@style/Widget.Material3.MaterialTimePicker.Button"
         android:layout_width="366dp"
         android:layout_height="67dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:background="@color/azul_claro"
-        android:text="Meus cartões"
+        android:text="@string/meusCartoes"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -192,19 +248,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutAcoes" />
 
     <LinearLayout
+        android:id="@+id/layoutCartaoCredito"
         android:layout_width="365dp"
         android:layout_height="208dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button18">
+        app:layout_constraintTop_toBottomOf="@+id/buttonMeusCartoes"
+        app:layout_constraintVertical_bias="0.452">
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/imageViewCartao2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="center"
@@ -217,17 +275,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/textViewCartoesCredito"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:text="Cartão de Crédito"
+                android:text="@string/cartaoCredito"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button19"
+                android:id="@+id/buttonCartaoCredito"
                 android:layout_width="60dp"
                 android:layout_height="21dp"
                 android:layout_marginLeft="120dp"
@@ -239,28 +297,28 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textViewFaturaAtual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Fatura Atual" />
+            android:text="@string/faturaAtual" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textViewValorFaturaAtual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="R$ 1.094,80"
+            android:text="@string/saldoConta"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textViewLimiteDisponivel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Limite disponível: R$ 730,00" />
+            android:text="@string/limiteDisponivel" />
 
     </LinearLayout>
 

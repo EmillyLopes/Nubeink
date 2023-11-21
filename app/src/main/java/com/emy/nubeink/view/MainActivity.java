@@ -1,4 +1,4 @@
-package com.emy.nubeink;
+package com.emy.nubeink.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.emy.nubeink.cadastro.CadastroActivity;
-import com.emy.nubeink.usuarios.SistemaUsuarios;
-import com.emy.nubeink.usuarios.Usuario;
+import com.emy.nubeink.R;
+import com.emy.nubeink.model.service.SistemaUsuarios;
+import com.emy.nubeink.model.dto.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Inicializa o sistema de usuários
-        sistema = new SistemaUsuarios();
+        sistema = new SistemaUsuarios(this);
 
         //Identificando os elementos da tela
         emailLogin = findViewById(R.id.editTextPersonEmailLogin);
@@ -56,21 +56,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private void buscarUsuario(Usuario usuario) {
-        // Verifica se o e-mail está vazio
         if (!usuario.getEmail().isEmpty()) {
-            // Busca o usuário pelo e-mail
             Usuario usuarioEncontrado = sistema.buscarUsuarioPorEmail(usuario.getEmail());
-
-            // Exibe o resultado na TextView
             if (usuarioEncontrado != null) {
-                Toast.makeText(getApplicationContext(),"Usuário encontrado: " + usuarioEncontrado.getNome(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Usuário encontrado: " + usuarioEncontrado.getNome(), Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+                it.putExtra("NOME_USUARIO", usuarioEncontrado.getNome());
+                it.putExtra("SALDO_USUARIO", usuarioEncontrado.getSaldo());
+                startActivity(it);
             } else {
-                Toast.makeText(getApplicationContext(),"Usuário não encontrado para o e-mail: " + usuarioEncontrado.getEmail(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Usuário não encontrado para o e-mail: " + usuario.getEmail(), Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(),"Digite um e-mail antes de buscar.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Digite um e-mail antes de buscar.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

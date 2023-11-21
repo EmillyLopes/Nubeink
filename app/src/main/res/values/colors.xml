@@ -7,5 +7,6 @@
     <color name="background_light">#EFF0FC</color>
     <color name="primary">#7F88FE</color>
     <color name="azul_claro">#C2C7FE</color>
+    <color name="azul">#3B608C</color>
 
 </resources>
