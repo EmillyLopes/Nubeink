@@ -19,12 +19,14 @@ import java.math.BigDecimal;
 
 public class TransferirActivity extends AppCompatActivity {
 
+    private Usuario usuarioLogado;
     private SistemaUsuarios sistema;
     private TextView TextSaldo;
     private EditText editTextSaldo;
     private EditText idConta;
     private EditText nomeConta;
     private Button buttonTransferir;
+    private ImageButton buttonSair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,16 @@ public class TransferirActivity extends AppCompatActivity {
         idConta = findViewById(R.id.editTextPersonIDTransferir);
         // Identificando botões
         buttonTransferir = findViewById(R.id.buttonTransferirProximo);
+        buttonSair = findViewById(R.id.imageButtonSair);
 
+        String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
+        String emailUsuario = getIntent().getStringExtra("EMAIL_USUARIO");
         double saldoUsuario = getIntent().getDoubleExtra("SALDO_USUARIO", 0.0);
-        TextSaldo.setText("R$ " + saldoUsuario);
+        long idUsuario = getIntent().getLongExtra("ID_USUARIO", 1);
+
+        usuarioLogado = new Usuario(idUsuario, nomeUsuario, emailUsuario, saldoUsuario);
+        Double saldoPeloBanco = sistema.buscarSaldoUsuario(usuarioLogado);
+        TextSaldo.setText("R$ " + saldoPeloBanco);
 
         buttonTransferir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,64 +61,57 @@ public class TransferirActivity extends AppCompatActivity {
                 String nome = nomeConta.getText().toString();
                 String idContaText = idConta.getText().toString();
 
-                boolean saldoValido = verificaSaldo(saldo);
-                if (saldoValido) {
-                    buscarUsuario(saldo,nome, idContaText);
-//                    realizarTransferencia(saldo, nome, idContaText);
-                }
+                Double valor = verificaSaldo(saldo);
+                buscarUsuario(valor, nome, idContaText);
+            }
+        });
+
+        buttonSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Cancelando operação e voltando para o menu principal", Toast.LENGTH_SHORT).show();
+                Intent intent = sistema.criarIntentUsuario(usuarioLogado, TransferirActivity.this, MenuActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    private boolean verificaSaldo(String valor) {
-        Double saldoValido = Double.valueOf(valor);
-        if (saldoValido <= 0) {
-            Toast.makeText(getApplicationContext(), "O valor da transferência deve ser positivo.", Toast.LENGTH_SHORT).show();
-            return false;
+    private Double verificaSaldo(String valor) {
+        Double saldoValido = null;
+        try {
+            saldoValido = Double.parseDouble(valor);
+            if (saldoValido <= 0) {
+                Toast.makeText(getApplicationContext(), "O valor da transferência deve ser positivo.", Toast.LENGTH_SHORT).show();
+                saldoValido = null;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getApplicationContext(), "Por favor, insira um valor válido.", Toast.LENGTH_SHORT).show();
         }
-        return true;
+        return saldoValido;
     }
 
+    private void buscarUsuario(Double valor, String nome, String idContaText) {
+        if (valor != null && valor != 0) {
+            if (!nome.isEmpty() || !idContaText.isEmpty()) {
+                long id = !idContaText.isEmpty() ? Long.parseLong(idContaText) : 0;
+                Usuario usuarioEncontrado = sistema.buscarUsuario(nome, id);
 
-    private void buscarUsuario(String saldo, String nome, String idContaText) {
-        if(saldo.isEmpty()){
-            double saldoo = Double.parseDouble(saldo);
-            if (!nome.isEmpty() && !idContaText.isEmpty()) {
-                long id = Long.parseLong(idContaText);
-                Usuario usuarioEncontradoPorNomeEId = sistema.buscarUsuarioPorNomeEID(nome, id);
-                if (usuarioEncontradoPorNomeEId != null) {
-                    Toast.makeText(getApplicationContext(), "Usuário encontrado por nome e ID: " + usuarioEncontradoPorNomeEId.getNome(), Toast.LENGTH_SHORT).show();
-                    sistema.realizarTransferencia(saldoo, nome, id);
-                    Toast.makeText(getApplicationContext(), "Transferência realizada com sucesso.", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(TransferirActivity.this, MenuActivity.class);
-                    it.putExtra("SALDO_USUARIO", sistema.buscarUsuarioPorNome(nome).getSaldo());
-                    startActivity(it);
+                if (usuarioEncontrado != null) {
+                    realizarTransferencia(usuarioLogado, valor, usuarioEncontrado);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Usuário não encontrado para o nome: " + nome + " e ID: " + id, Toast.LENGTH_SHORT).show();
-                }
-            } else if (!nome.isEmpty()) {
-                Usuario usuarioEncontradoPorNome = sistema.buscarUsuarioPorNome(nome);
-                if (usuarioEncontradoPorNome != null) {
-                    Toast.makeText(getApplicationContext(), "Usuário encontrado por nome: " + usuarioEncontradoPorNome.getNome(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Usuário não encontrado para o nome: " + nome, Toast.LENGTH_SHORT).show();
-                }
-            } else if (!idContaText.isEmpty()) {
-                long id = Long.parseLong(idContaText);
-                Usuario usuarioEncontradoPorId = sistema.buscarUsuarioPorId(id);
-                if (usuarioEncontradoPorId != null) {
-                    Toast.makeText(getApplicationContext(), "Usuário encontrado por ID: " + usuarioEncontradoPorId.getNome(), Toast.LENGTH_SHORT).show();
-                    sistema.realizarTransferencia(saldoo, nome, id);
-                    Toast.makeText(getApplicationContext(), "Transferência realizada com sucesso.", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(TransferirActivity.this, MenuActivity.class);
-                    it.putExtra("SALDO_USUARIO", sistema.buscarUsuarioPorNome(nome).getSaldo());
-                    startActivity(it);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Usuário não encontrado para o ID: " + id, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Usuário não encontrado.", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Digite um nome ou ID antes de buscar.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void realizarTransferencia(Usuario usuarioLogado, double saldoTransferencia, Usuario usuarioDestino) {
+        sistema.realizarTransferencia(usuarioLogado, saldoTransferencia, usuarioDestino);
+        Toast.makeText(getApplicationContext(), "Transferência realizada com sucesso.", Toast.LENGTH_SHORT).show();
+
+        Intent intent = sistema.criarIntentUsuario(usuarioLogado, TransferirActivity.this, MenuActivity.class);
+        startActivity(intent);
     }
 }

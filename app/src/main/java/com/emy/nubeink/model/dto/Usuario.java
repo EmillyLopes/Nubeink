@@ -17,6 +17,13 @@ public class Usuario {
         this.saldo = saldo;
     }
 
+    public Usuario(long id, String nome, String email, double saldo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.saldo = saldo;
+    }
+
     // Construtor
     public Usuario(String senha, String email, String nome, double saldo) {
         this.senha = senha;

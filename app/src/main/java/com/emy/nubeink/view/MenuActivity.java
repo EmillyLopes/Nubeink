@@ -17,6 +17,8 @@ import com.emy.nubeink.model.dto.Usuario;
 import com.emy.nubeink.model.service.SistemaUsuarios;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private Usuario usuarioLogado;
     private ImageView imagemPerfil;
     private TextView textViewNome;
     private Button buttonOcultar;
@@ -52,17 +54,20 @@ public class MenuActivity extends AppCompatActivity {
 
         // Obtendo dados do Intent
         String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
+        String emailUsuario = getIntent().getStringExtra("EMAIL_USUARIO");
         double saldoUsuario = getIntent().getDoubleExtra("SALDO_USUARIO", 0.0);
+        long idUsuario = getIntent().getLongExtra("ID_USUARIO", 1);
 
-        // Exibindo dados do usuário
-        textViewNome.setText("Olá, " + nomeUsuario);
-        textViewSaldo.setText("R$ " + saldoUsuario);
+        usuarioLogado = new Usuario(idUsuario, nomeUsuario, emailUsuario, saldoUsuario);
+
+        textViewNome.setText("Olá, " + usuarioLogado.getNome());
+        Double saldoPeloBanco = sistemaUsuarios.buscarSaldoUsuario(usuarioLogado);
+        textViewSaldo.setText("R$ " + saldoPeloBanco);
 
         buttonTransferir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(MenuActivity.this, TransferirActivity.class);
-                it.putExtra("SALDO_USUARIO", saldoUsuario);
+                Intent it = sistemaUsuarios.criarIntentUsuario(usuarioLogado,MenuActivity.this, TransferirActivity.class);
                 startActivity(it);
             }
         });

@@ -1,6 +1,7 @@
 package com.emy.nubeink.model.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -10,9 +11,7 @@ import com.emy.nubeink.model.repository.UsuarioDbHelper;
 import java.util.Optional;
 
 public class SistemaUsuarios {
-    private static final String PREF_USUARIO_LOGADO = "usuario_logado";
     private UsuarioDbHelper dbHelper;
-    private Context context;
 
     public SistemaUsuarios(Context context) {
         dbHelper = new UsuarioDbHelper(context);
@@ -38,33 +37,42 @@ public class SistemaUsuarios {
         return dbHelper.buscarUsuarioPorNomeEId(nome, id);
     }
 
-    public void realizarTransferencia(double valor, String nomeDestino, long idDestino) {
-        // Busca o usuário de origem (suponhamos que você já tenha o usuário logado)
-        Optional<Usuario> usuarioOrigem = obterUsuarioLogado();
+    public Usuario buscarUsuario(String nomeDestino, long idDestino) {
+        if (!nomeDestino.isEmpty() && idDestino != 0) {
+            return buscarUsuarioPorNomeEID(nomeDestino, idDestino);
+        } else if (!nomeDestino.isEmpty()) {
+            return buscarUsuarioPorNome(nomeDestino);
+        } else if (idDestino != 0) {
+            return buscarUsuarioPorId(idDestino);
+        }
+        return null;
+    }
 
-        // Verifica se o usuário de origem possui saldo suficiente
+    public double buscarSaldoUsuario(Usuario usuario) {
+        Usuario usuarioEcontrado = buscarUsuario(usuario.getNome(), usuario.getId());
+        if (usuarioEcontrado != null) {
+            return usuarioEcontrado.getSaldo();
+        } else {
+            // Você pode retornar um valor padrão ou lançar uma exceção, dependendo da lógica do seu aplicativo.
+            return 0.0;
+        }
+    }
+
+    public Optional<Usuario> obterUsuarioLogado(Usuario usuario) {
+        return Optional.ofNullable(buscarUsuarioPorId(usuario.getId()));
+    }
+
+    public void atualizarUsuario(Usuario usuarioAtualizado) {
+        dbHelper.atualizarUsuario(usuarioAtualizado);
+    }
+
+    public void realizarTransferencia(Usuario usuarioLogado, double valor, Usuario usuarioDestino) {
+        Optional<Usuario> usuarioOrigem = obterUsuarioLogado(usuarioLogado);
+
         if (usuarioOrigem.isPresent() && usuarioOrigem.get().getSaldo() >= valor) {
-            // Busca o usuário de destino
-            Usuario usuarioDestino = null;
-            if (!nomeDestino.isEmpty() && idDestino != 0) {
-                usuarioDestino = buscarUsuarioPorNomeEID(nomeDestino, idDestino);
-            } else if (!nomeDestino.isEmpty()) {
-                usuarioDestino = buscarUsuarioPorNome(nomeDestino);
-            } else if (idDestino != 0) {
-                usuarioDestino = buscarUsuarioPorId(idDestino);
-            }
-
-            // Verifica se o usuário de destino foi encontrado
-            if (usuarioDestino != null) {
-                // Realiza a transferência
-                usuarioOrigem.get().debitarSaldo(valor);
-                usuarioDestino.creditarSaldo(valor);
-
-                // Atualiza os dados no banco de dados
-                atualizarUsuario(usuarioOrigem.get());
-                atualizarUsuario(usuarioDestino);
-
-                Log.i("SistemaUsuarios", "Transferência realizada com sucesso.");
+            Usuario usuarioDestinoEncontrado = buscarUsuario(usuarioDestino.getNome(), usuarioDestino.getId());
+            if (usuarioDestinoEncontrado != null) {
+                transferirSaldo(usuarioOrigem.get(), usuarioDestinoEncontrado, valor);
             } else {
                 Log.e("SistemaUsuarios", "Usuário de destino não encontrado.");
             }
@@ -73,24 +81,22 @@ public class SistemaUsuarios {
         }
     }
 
-    public Optional<Usuario> obterUsuarioLogado() {
-        Optional<Long> idUsuarioLogado = obterIdUsuarioLogado();
-        // Verifica se o ID do usuário logado está presente
-        return idUsuarioLogado.map(id -> buscarUsuarioPorId(id));
+    private void transferirSaldo(Usuario usuarioOrigem, Usuario usuarioDestino, double valor) {
+        usuarioOrigem.debitarSaldo(valor);
+        usuarioDestino.creditarSaldo(valor);
+
+        atualizarUsuario(usuarioOrigem);
+        atualizarUsuario(usuarioDestino);
+
+        Log.i("SistemaUsuarios", "Transferência realizada com sucesso.");
     }
 
-    private Optional<Long> obterIdUsuarioLogado() {
-        // Obtém as preferências compartilhadas
-        SharedPreferences preferences = context.getSharedPreferences("MeuAppPrefs", Context.MODE_PRIVATE);
-
-        // Obtém o ID do usuário logado (ou retorna vazio se não estiver presente)
-        return Optional.of(preferences.getLong(PREF_USUARIO_LOGADO, -1L));
-    }
-
-    public void atualizarUsuario(Usuario usuarioAtualizado) {
-        obterIdUsuarioLogado().ifPresent(id -> {
-            usuarioAtualizado.setId(id);
-            dbHelper.atualizarUsuario(usuarioAtualizado);
-        });
+    public Intent criarIntentUsuario(Usuario usuarioEncontrado, Context packageContext, Class<?> classeDestino) {
+        Intent intent = new Intent(packageContext, classeDestino);
+        intent.putExtra("NOME_USUARIO", usuarioEncontrado.getNome());
+        intent.putExtra("EMAIL_USUARIO", usuarioEncontrado.getEmail());
+        intent.putExtra("SALDO_USUARIO", usuarioEncontrado.getSaldo());
+        intent.putExtra("ID_USUARIO", usuarioEncontrado.getId());
+        return intent;
     }
 }

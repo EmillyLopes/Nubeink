@@ -61,9 +61,7 @@ public class MainActivity extends AppCompatActivity {
             Usuario usuarioEncontrado = sistema.buscarUsuarioPorEmail(usuario.getEmail());
             if (usuarioEncontrado != null) {
                 Toast.makeText(getApplicationContext(), "Usuário encontrado: " + usuarioEncontrado.getNome(), Toast.LENGTH_SHORT).show();
-                Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                it.putExtra("NOME_USUARIO", usuarioEncontrado.getNome());
-                it.putExtra("SALDO_USUARIO", usuarioEncontrado.getSaldo());
+                Intent it = sistema.criarIntentUsuario(usuarioEncontrado,MainActivity.this, MenuActivity.class);
                 startActivity(it);
             } else {
                 Toast.makeText(getApplicationContext(), "Usuário não encontrado para o e-mail: " + usuario.getEmail(), Toast.LENGTH_SHORT).show();
@@ -72,5 +70,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Digite um e-mail antes de buscar.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

@@ -125,4 +125,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInformaCoesContaTransferencia" />
 
+    <ImageButton
+        android:id="@+id/imageButtonSair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/windowSplashScreenIconBackgroundColor"
+        android:tint="@color/purple_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
