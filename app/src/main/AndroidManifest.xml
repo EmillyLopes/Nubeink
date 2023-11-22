@@ -21,6 +21,9 @@
         <activity android:name=".view.TransferirActivity"
             android:exported="false"
             android:label=""/>
+        <activity android:name=".view.DepositarActivity"
+            android:exported="false"
+            android:label=""/>
         <activity
             android:name=".view.MainActivity"
             android:exported="true" >

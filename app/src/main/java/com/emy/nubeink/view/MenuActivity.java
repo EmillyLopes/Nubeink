@@ -29,6 +29,9 @@ public class MenuActivity extends AppCompatActivity {
     private Button buttonConta;
     private Button buttonMeusCartoes;
     private ImageButton buttonTransferir;
+    private ImageButton buttonPix;
+    private ImageButton buttonDeposito;
+    private ImageButton buttonSair;
 
     private SistemaUsuarios sistemaUsuarios;
 
@@ -51,6 +54,9 @@ public class MenuActivity extends AppCompatActivity {
         buttonConta = findViewById(R.id.buttonConta);
         buttonMeusCartoes = findViewById(R.id.buttonMeusCartoes);
         buttonTransferir = findViewById(R.id.buttonTransferir);
+        buttonSair = findViewById(R.id.imageButtonSairMenu);
+        buttonPix = findViewById(R.id.buttonPix);
+        buttonDeposito = findViewById(R.id.buttonDepositar);
 
         // Obtendo dados do Intent
         String nomeUsuario = getIntent().getStringExtra("NOME_USUARIO");
@@ -68,6 +74,30 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = sistemaUsuarios.criarIntentUsuario(usuarioLogado,MenuActivity.this, TransferirActivity.class);
+                startActivity(it);
+            }
+        });
+
+        buttonPix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = sistemaUsuarios.criarIntentUsuario(usuarioLogado,MenuActivity.this, TransferirActivity.class);
+                startActivity(it);
+            }
+        });
+
+        buttonDeposito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = sistemaUsuarios.criarIntentUsuario(usuarioLogado,MenuActivity.this, DepositarActivity.class);
+                startActivity(it);
+            }
+        });
+
+        buttonSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = sistemaUsuarios.criarIntentUsuario(usuarioLogado,MenuActivity.this, MainActivity.class);
                 startActivity(it);
             }
         });

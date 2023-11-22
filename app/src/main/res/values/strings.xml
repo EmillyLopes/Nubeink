@@ -25,8 +25,10 @@
     <string name="faturaAtual">Fatura Atual</string>
     <string name="limiteDisponivel">Limite disponível: R$ 730,00</string>
     <string name="zero">R$ 0,00</string>
-    <string name="qualContaTranferencia">Qual é o nome ou ID que vai ser feita transferência?</string>
+    <string name="qualValorTransferencia">Qual é o valor da transferencia?</string>
+    <string name="qualContaTranferencia">Qual é o nome ou ID que vai ser feita transferencia?</string>
     <string name="id">ID</string>
     <string name="qualValorDeposito">Qual é o valor do depósito?</string>
-    <string name="qualContaDeposito">Qual é o nome ou ID que vai ser feita depósito?</string>
+    <string name="qualContaDeposito">Qual é o nome ou ID que vai ser feita transferencia?</string>
+
 </resources>

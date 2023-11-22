@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTextValorDeposito"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:autofillHints="@string/zero"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/salvando"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/zero"
+        android:inputType="text"
+        android:textColorHint="#3B608C"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSaldoDisponivelDeposito" />
+
+    <Button
+        android:id="@+id/buttonRealizarDeposito"
+        android:layout_width="93dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="148dp"
+        android:layout_marginEnd="32dp"
+        android:background="?android:attr/windowSplashScreenBackground"
+        android:drawableTop="@drawable/btn_arraw1"
+        android:drawableTintMode="screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextContaDestinoDeposito" />
+
+    <TextView
+        android:id="@+id/textViewQualValorDeposito"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/qualValorDeposito"
+        android:textColor="@color/purple_primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSaldoDisponivelDeposito"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/saldoDisponivel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewQualValorDeposito" />
+
+    <TextView
+        android:id="@+id/textViewsSaldoRealDeposito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/saldoConta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSaldoDisponivelDeposito"
+        app:layout_constraintTop_toBottomOf="@+id/textViewQualValorDeposito" />
+
+    <TextView
+        android:id="@+id/textInformacoesContaDeposito"
+        android:layout_width="350dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/qualContaDeposito"
+        android:textColor="@color/purple_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextValorDeposito" />
+
+    <EditText
+        android:id="@+id/editTextContaDestinoDeposito"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="@string/nome"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/id"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/id"
+        android:inputType="text"
+        android:textColorHint="#3B608C"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInformacoesContaDeposito" />
+
+    <EditText
+        android:id="@+id/editTextNomeContaDeposito"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints="@string/nome"
+        android:background="@drawable/edittext_background"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:inputType="text"
+        android:textColorHint="#3B608C"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInformacoesContaDeposito" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSairDeposito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/windowSplashScreenIconBackgroundColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+        app:tint="@color/purple_primary" />
+</androidx.constraintlayout.widget.ConstraintLayout>
