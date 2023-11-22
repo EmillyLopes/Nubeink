@@ -31,7 +31,7 @@
         android:drawablePadding="16dp"
         android:ems="10"
         android:hint="@string/Senha"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:textColorHint="@color/azul"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

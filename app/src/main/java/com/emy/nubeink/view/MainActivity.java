@@ -50,24 +50,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, CadastroActivity.class);
-                it.putExtra("mgs", "ola");
                 startActivity(it);
             }
         });
     }
 
     private void buscarUsuario(Usuario usuario) {
-        if (!usuario.getEmail().isEmpty()) {
+        if (!usuario.getEmail().isEmpty() && !usuario.getSenha().isEmpty()) {
             Usuario usuarioEncontrado = sistema.buscarUsuarioPorEmail(usuario.getEmail());
-            if (usuarioEncontrado != null) {
-                Toast.makeText(getApplicationContext(), "Usuário encontrado: " + usuarioEncontrado.getNome(), Toast.LENGTH_SHORT).show();
-                Intent it = sistema.criarIntentUsuario(usuarioEncontrado,MainActivity.this, MenuActivity.class);
-                startActivity(it);
+            if (usuarioEncontrado != null ) {
+                if(usuario.getSenha().equals(usuarioEncontrado.getSenha())){
+                    Toast.makeText(getApplicationContext(), "Usuário encontrado: " + usuarioEncontrado.getNome(), Toast.LENGTH_SHORT).show();
+                    Intent it = sistema.criarIntentUsuario(usuarioEncontrado,MainActivity.this, MenuActivity.class);
+                    startActivity(it);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Senha incorreta", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(getApplicationContext(), "Usuário não encontrado para o e-mail: " + usuario.getEmail(), Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Digite um e-mail antes de buscar.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Digite um e-mail e senha antes de buscar", Toast.LENGTH_SHORT).show();
         }
     }
 }
