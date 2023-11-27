@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText saldoCadastro;
     private TextView cadastro;
     private Button buttonCadastro;
+    private ImageButton buttonSair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class CadastroActivity extends AppCompatActivity {
         //Identificando botões
         buttonCadastro = findViewById(R.id.buttonCadastrar);
         cadastro = findViewById(R.id.textViewCadastre);
+        buttonSair = findViewById(R.id.imageButtonSairCadastro);
 
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +58,14 @@ public class CadastroActivity extends AppCompatActivity {
                     Usuario usuario = new Usuario(nome, email, senha, saldo);
                     validaESalva(usuario);
                 }
+            }
+        });
+
+        buttonSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(CadastroActivity.this, MainActivity.class);
+                startActivity(it);
             }
         });
     }
